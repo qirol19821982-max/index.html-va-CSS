@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Xurshidbek — Full Stack dasturchi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3F2FF; --surface:#FFFFFF; --ink:#14123A; --muted:#55527F;
+  --brand:#3D3BF3; --brand-ink:#FFFFFF; --sun:#FFD84D; --mint:#14B886;
+  --line:#D9D7F5; --code-bg:#14123A; --code-ink:#E7E6FF;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0F0E26; --surface:#1A1840; --ink:#F1F0FF; --muted:#A9A6D6;
+    --brand:#8C8BFF; --brand-ink:#0F0E26; --line:#2E2B66; --code-bg:#07061A; --code-ink:#E7E6FF;
+  }
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;line-height:1.65;font-size:17px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif;line-height:1.1;letter-spacing:-.02em}
+
+/* nav */
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.logo{font-family:'Bricolage Grotesque';font-weight:800;font-size:1.3rem;text-decoration:none}
+.logo span{color:var(--brand)}
+nav ul{display:flex;gap:22px;list-style:none;padding:0}
+nav ul a{text-decoration:none;color:var(--muted);font-weight:500}
+nav ul a:hover{color:var(--ink)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding:56px 0 88px}
+.hero h1{font-size:clamp(2.8rem,8vw,5.6rem);font-weight:800}
+.hero h1 small{display:block;font-size:.34em;font-weight:500;color:var(--muted);letter-spacing:0;margin-bottom:14px}
+.hero p{margin:22px 0 30px;max-width:46ch;color:var(--muted);font-size:1.15rem}
+.btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:14px 26px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid var(--ink);transition:transform .15s}
+.btn.main{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.btn:hover{transform:translateY(-3px)}
+.code{background:var(--code-bg);color:var(--code-ink);border-radius:20px;padding:22px 24px;font-family:'JetBrains Mono',monospace;font-size:.92rem;line-height:1.8;box-shadow:10px 10px 0 var(--sun);min-height:300px}
+.code .dots{display:flex;gap:7px;margin-bottom:16px}
+.code .dots i{width:12px;height:12px;border-radius:50%;background:#FF6B6B}
+.code .dots i:nth-child(2){background:var(--sun)}
+.code .dots i:nth-child(3){background:var(--mint)}
+.k{color:#8C8BFF}.s{color:#7CF0C4}.n{color:#FFD84D}
+.cursor{display:inline-block;width:9px;height:1.1em;background:var(--sun);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* sections */
+section{padding:72px 0;border-top:2px solid var(--line)}
+section h2{font-size:clamp(2rem,5vw,3rem);margin-bottom:12px}
+.lead{color:var(--muted);max-width:60ch;margin-bottom:36px}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.facts{display:grid;gap:14px;align-content:start}
+.fact{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:16px 20px;display:flex;justify-content:space-between;gap:16px}
+.fact b{font-family:'Bricolage Grotesque';font-size:1.1rem}
+.fact span{color:var(--muted)}
+
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.group{background:var(--surface);border:2px solid var(--line);border-radius:22px;padding:26px}
+.group h3{font-size:1.4rem;margin-bottom:16px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;padding:0;list-style:none}
+.chips li{padding:7px 15px;border-radius:999px;background:var(--bg);border:2px solid var(--line);font-weight:500;font-size:.95rem}
+.group:nth-child(1) h3{box-shadow:inset 0 -10px 0 var(--sun)}
+.group:nth-child(2) h3{box-shadow:inset 0 -10px 0 color-mix(in srgb,var(--mint) 55%,transparent)}
+.group:nth-child(3) h3{box-shadow:inset 0 -10px 0 color-mix(in srgb,var(--brand) 40%,transparent)}
+.group h3{display:inline-block}
+
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:24px}
+.card{background:var(--surface);border:2px solid var(--ink);border-radius:22px;padding:28px;display:flex;flex-direction:column;gap:14px;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--brand)}
+.card h3{font-size:1.5rem}
+.card p{color:var(--muted);flex:1}
+.card .stack{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--brand)}
+.card a{font-weight:700;text-decoration:none;color:var(--brand)}
+
+.contact{text-align:center}
+.contact .lead{margin-inline:auto}
+.links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+footer{text-align:center;color:var(--muted);padding:32px 0 48px;font-size:.95rem}
+
+@media(max-width:800px){
+  .hero,.about{grid-template-columns:1fr}
+  nav ul{gap:14px;font-size:.95rem}
+  .code{min-height:260px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="#top">xurshid<span>bek</span></a>
+    <ul>
+      <li><a href="#haqida">Men haqimda</a></li>
+      <li><a href="#skills">Texnologiyalar</a></li>
+      <li><a href="#loyihalar">Loyihalar</a></li>
+      <li><a href="#aloqa">Aloqa</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero" id="top">
+    <div>
+      <h1><small>Salom, men</small>Xurshidbek</h1>
+      <p>13 yoshli Full Stack dasturchiman. Veb-saytlarni ham ko‘rinishidan, ham ichidagi ishlashigacha o‘zim yarataman.</p>
+      <div class="btns">
+        <a class="btn main" href="#loyihalar">Loyihalarimni ko‘rish</a>
+        <a class="btn" href="#aloqa">Menga yozing</a>
+      </div>
+    </div>
+    <div class="code" aria-label="Xurshidbek haqida qisqa kod">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <pre id="type" style="font:inherit;white-space:pre-wrap"></pre>
+    </div>
+  </header>
+
+  <section id="haqida">
+    <h2>Men haqimda</h2>
+    <div class="about">
+      <div>
+        <p>Mening ismim Xurshidbek, yoshim 13 da. Men dasturlashni yaxshi ko‘raman, chunki bir g‘oyani kod yordamida haqiqiy ishlaydigan narsaga aylantirish mumkin.</p>
+        <p style="margin-top:16px">Full Stack dasturchi sifatida saytning ko‘rinadigan qismini (frontend) ham, serveri va ma’lumotlar bazasini (backend) ham o‘zim yozaman. Har kuni yangi narsa o‘rganishga va yangi loyihalar qilishga harakat qilaman.</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><b>Yosh</b><span>13</span></div>
+        <div class="fact"><b>Yo‘nalish</b><span>Full Stack</span></div>
+        <div class="fact"><b>Maqsad</b><span>Katta mahsulotlar yaratish</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Texnologiyalar</h2>
+    <p class="lead">Ishlarimda ishlatadigan asosiy vositalar.</p>
+    <div class="skills">
+      <div class="group">
+        <h3>Frontend</h3>
+        <ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>React</li></ul>
+      </div>
+      <div class="group">
+        <h3>Backend</h3>
+        <ul class="chips"><li>Node.js</li><li>Python</li><li>REST API</li><li>SQL</li></ul>
+      </div>
+      <div class="group">
+        <h3>Vositalar</h3>
+        <ul class="chips"><li>Git</li><li>GitHub</li><li>VS Code</li><li>Figma</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="loyihalar">
+    <h2>Loyihalarim</h2>
+    <p class="lead">Mana men yaratgan ba’zi ishlar. Har bir loyiha ustida yangi narsa o‘rganganman.</p>
+    <div class="projects">
+      <article class="card">
+        <h3>Vazifalar ro‘yxati</h3>
+        <p>Kundalik ishlarni qo‘shish, belgilash va o‘chirish mumkin bo‘lgan ilova. Ma’lumotlar saqlanadi.</p>
+        <span class="stack">JavaScript · Node.js</span>
+        <a href="#">Ko‘rish</a>
+      </article>
+      <article class="card">
+        <h3>Ob-havo ilovasi</h3>
+        <p>Shahar nomini yozsangiz, bugungi va kelgusi kunlar ob-havosini ko‘rsatadi.</p>
+        <span class="stack">HTML · CSS · API</span>
+        <a href="#">Ko‘rish</a>
+      </article>
+      <article class="card">
+        <h3>Mening blogim</h3>
+        <p>Maqola yozish, tahrirlash va o‘qish mumkin bo‘lgan sayt. Admin paneli ham bor.</p>
+        <span class="stack">React · Python · SQL</span>
+        <a href="#">Ko‘rish</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="aloqa" class="contact">
+    <h2>Birga ishlaymizmi?</h2>
+    <p class="lead">Loyiha g‘oyangiz bormi yoki shunchaki salom aytmoqchimisiz? Menga yozing, albatta javob beraman.</p>
+    <div class="links">
+      <a class="btn main" href="mailto:sizning@emailingiz.com">Email yozish</a>
+      <a class="btn" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://t.me/" target="_blank" rel="noopener">Telegram</a>
+    </div>
+  </section>
+
+  <footer>© 2026 Xurshidbek. Barcha huquqlar himoyalangan.</footer>
+</div>
+
+<script>
+const lines=[
+ '<span class="k">const</span> men = {',
+ '  ism: <span class="s">"Xurshidbek"</span>,',
+ '  yosh: <span class="n">13</span>,',
+ '  kasb: <span class="s">"Full Stack dasturchi"</span>,',
+ '  yaxshiKoradi: [<span class="s">"kod"</span>, <span class="s">"yangi g‘oyalar"</span>],',
+ '  hozirOrganyapti: <span class="s">"har kuni yangi narsa"</span>',
+ '};'
+];
+const el=document.getElementById('type');
+const full=lines.join('\n');
+const cursor='<span class="cursor"></span>';
+if(matchMedia('(prefers-reduced-motion:reduce)').matches){
+  el.innerHTML=full+cursor;
+}else{
+  let out='';
+  const flat=full.split(/(<[^>]+>)/).filter(Boolean);
+  let t=0,c=0;
+  (function tick(){
+    if(t>=flat.length){el.innerHTML=out+cursor;return}
+    const part=flat[t];
+    if(part.startsWith('<')){out+=part;t++;tick();return}
+    out+=part[c++];
+    if(c>=part.length){t++;c=0}
+    el.innerHTML=out+cursor;
+    setTimeout(tick,28);
+  })();
+}
+</script>
+</body>
+</html>
